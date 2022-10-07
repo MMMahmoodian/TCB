@@ -15,7 +15,7 @@ class CreateCyberiUsersTable extends Migration
     {
         Schema::create('cyberi_users', function (Blueprint $table) {
             $table->id();
-            $table->string("username");
+            $table->string("username")->unique();
             $table->string("twitter_user_id")->nullable();
             $table->timestamps();
         });

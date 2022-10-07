@@ -18,9 +18,10 @@ class CyberiUserTableSeeder extends Seeder
         $file = Storage::get("cybberi.txt");
         $usernames = preg_split('/\n|\r\n?/', $file);
         foreach ($usernames as $username){
-            CyberiUser::create([
-                "username" => $username
-            ]);
+            CyberiUser::updateOrCreate(
+                ["username" => $username],
+                ["username" => $username]
+            );
         }
     }
 }
