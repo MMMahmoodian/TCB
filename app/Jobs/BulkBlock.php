@@ -55,7 +55,6 @@ class BulkBlock implements ShouldQueue
         try {
             foreach ($cyberiUsers as $cyberiUser){
                 $update = false;
-                Log::info("Blocking $cyberiUser->id");
                 if (isset($cyberiUser->twitter_user_id)) {
                     $params = ["user_id" => $cyberiUser->twitter_user_id];
                 }else{
@@ -63,7 +62,6 @@ class BulkBlock implements ShouldQueue
                     $update = true;
                 }
                 $result = $this->twitterConnection->post("/blocks/create", $params);
-                Log::info("Blocked $cyberiUser->id");
                 $lastBlock = $cyberiUser->id;
                 if ($update){
                     $cyberiUser->update([
