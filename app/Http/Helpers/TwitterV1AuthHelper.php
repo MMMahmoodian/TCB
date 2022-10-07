@@ -5,6 +5,7 @@ namespace App\Http\Helpers;
 
 
 use Abraham\TwitterOAuth\TwitterOAuth;
+use Illuminate\Support\Facades\URL;
 
 class TwitterV1AuthHelper
 {
@@ -13,7 +14,6 @@ class TwitterV1AuthHelper
         $consumerKey = config('twitter.consumer.key');
         $consumerSecret = config('twitter.consumer.secret');
         $connection = new TwitterOAuth($consumerKey, $consumerSecret);
-        echo route("v1-oauth-callback");
         $tempCredentials = $connection->oauth('oauth/request_token', array("oauth_callback" => route("v1-oauth-callback")));
         if ($tempCredentials["oauth_callback_confirmed"]){
             return $connection->url("oauth/authorize", array("oauth_token" => $tempCredentials['oauth_token']));
